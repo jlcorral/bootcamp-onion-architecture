@@ -9,6 +9,7 @@ namespace OnionArchitecture.Api.Services.Configuration
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<ICreateAssignmentService, CreateAssignmentService>();
+            services.AddScoped<IUpdateAssignmentService, UpdateAssignmentService>(); 
         }
     }
 }
