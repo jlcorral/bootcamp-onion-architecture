@@ -13,13 +13,15 @@ namespace OnionArchitecture.Api.Services.Controllers
     {
         private readonly ICreateAssignmentService _createAssignmentService;
         private readonly IUpdateAssignmentService _updateAssignmentService;
-
+        private readonly ICompleteAssignmentService _completeAssignmentService;
 
         public AssignmentsController(ICreateAssignmentService createAssignmentService,
-            IUpdateAssignmentService updateAssignmentService)
+            IUpdateAssignmentService updateAssignmentService,
+            ICompleteAssignmentService completeAssignmentService)
         {
             _createAssignmentService = createAssignmentService;
             _updateAssignmentService = updateAssignmentService;
+            _completeAssignmentService = completeAssignmentService;
         }
 
         [HttpPost]
@@ -37,10 +39,17 @@ namespace OnionArchitecture.Api.Services.Controllers
                 await _updateAssignmentService.Update(updateAssignmentRequestDto);
                 return Ok();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> CompleteTask(int id)
+        {
+            await _completeAssignmentService.Complete(id);
+            return Ok();
         }
 
     }
