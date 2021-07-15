@@ -18,7 +18,7 @@ namespace OnionArchitecture.Core.Services
         {
             Assignment assignment = await _assignmentsRepository.Get(id);
             if (assignment == default(Assignment)) throw new Exception();
-            assignment.Completed = false;
+            assignment.Completed = true;
             await _assignmentsRepository.Update(assignment);
         }
     }
